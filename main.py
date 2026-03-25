@@ -11,6 +11,21 @@ def calculate_sum_and_average(numbers):
     average = total / len(numbers)
     return total, average
 
+
+def calculate_subtraction(numbers):
+    if not numbers:
+        raise ValueError("Dãy số không được rỗng nha.")
+    for n in numbers:
+        if not isinstance(n, int):
+            raise ValueError("Tất cả các phần tử trong dãy số phải là số nguyên.")
+        if n <= 0:
+            raise ValueError("Tất cả các số phải là số nguyên dương.")
+
+    result = numbers[0]
+    for n in numbers[1:]:
+        result -= n
+    return result
+
 # Hàm nhập dãy số từ người dùng và xử lý lỗi
 def get_numbers_from_user():
     while True:
