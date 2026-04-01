@@ -30,14 +30,14 @@ pipeline {
                     if (isUnix()) {
                         sh '''
                             python -m pip install --upgrade pip
-                            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-                            pip install ruff pytest coverage
+                            if [ ! -f requirements.txt ]; then echo "requirements.txt not found"; exit 1; fi
+                            pip install -r requirements.txt
                         '''
                     } else {
                         bat '''
                             python -m pip install --upgrade pip
-                            if exist requirements.txt pip install -r requirements.txt
-                            pip install ruff pytest coverage
+                            if not exist requirements.txt (echo requirements.txt not found && exit /b 1)
+                            pip install -r requirements.txt
                         '''
                     }
                 }
